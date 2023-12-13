@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main  # Set a branch to trigger deployment
+permissions:
+    contents: write
 
 jobs:
   build-and-deploy:
@@ -32,9 +34,10 @@ jobs:
       run: |
         mv docs/browser/* docs/
         rm -rf docs/browser
+        ls docs
 
     - name: Deploy to GitHub Pages 🚀
-      uses: JamesIves/github-pages-deploy-action@4.1.5
+      uses: JamesIves/github-pages-deploy-action@4.5.0
       with:
         branch: gh-pages  # The branch the action should deploy to.
         folder: docs  # The folder the action should deploy.
