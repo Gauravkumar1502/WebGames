@@ -1,10 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+/* define varaibles for colors in root */
+:root {
+    --background: #fff;
+    --color: #000;
+    color: var(--color);
+}
+
 *,
 *::before,
 *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+body{
+    background-color: #fff;
 }
 app-game{
     padding: 1rem;
@@ -12,7 +23,11 @@ app-game{
     height: 100dvh;
     display: grid;
     gap: 2rem;
-    grid-auto-rows: 2fr 5fr 1fr;
+    grid-auto-rows: 4fr 4fr 2fr;
     align-items: center;
     justify-items: center;
+}
+/* if dark mode selected in system settings */
+@media (prefers-color-scheme: dark) {
+    
 }

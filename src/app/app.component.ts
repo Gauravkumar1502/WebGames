@@ -1,11 +1,14 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { ComputerPlayer } from './computerPlayer';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, FormsModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -26,6 +29,8 @@ export class AppComponent {
   xScore: number = 0;
   oScore: number = 0;
   gameOutcome: string = "";
+  isPlayerVsPlayer: boolean = true;
+  computerPlayer: ComputerPlayer = new ComputerPlayer();
   // store scores in local storage create 2 keys for playerX and playerO
   // if local storage is not null, then load scores from local storage
   // else set scores to 0
@@ -59,6 +64,19 @@ export class AppComponent {
       // save scores to local storage
       localStorage.setItem("playerXScore", String(this.xScore));
       localStorage.setItem("playerOScore", String(this.oScore));
+    }
+    // computer player's turn
+    if (!this.isPlayerVsPlayer && 
+      this.gameOutcome == "" &&
+      !this.isPlayerXTurn) {
+        console.log(this.computerPlayer.getBestMove(this.grid));
+        const bestMove = this.computerPlayer.getBestMove(this.grid);
+        this.grid[Math.floor(bestMove / 3)][bestMove % 3] = "O";
+        this.isPlayerXTurn = true;
+        this.gameOutcome = this.isGameOver();
+        if (this.gameOutcome != "") {
+          this.dialog.nativeElement.showModal();
+        }
     }
   }
   newGame() {

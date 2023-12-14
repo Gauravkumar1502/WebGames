@@ -5,14 +5,32 @@ main{
     align-content: center;
     justify-self: center;
 }
-p{
-    outline: 1px solid black;
-    padding: 1rem;
-    text-align: center;
-    aspect-ratio: 1/1;
-    font-size: 1.5rem;
-    min-width: 100px;
+header > *{
+    margin-bottom: 1rem;
 }
+header > *:last-child{
+    padding: 2rem;
+}
+p{
+    /* outline: 1px solid black; */
+    padding: 1rem;
+    aspect-ratio: 1/1;
+    font-size: 2rem;
+    font-weight: bold;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* first 6 paragraphs */
+p:nth-child(-n+6){
+    border-bottom: 2px solid var(--color);
+}
+/* select last 1,4,7,10,13,16 paragraphs and 2,5,8,11,14,17 paragraphs */
+p:nth-child(3n+1),p:nth-child(3n+2){
+    border-right: 2px solid var(--color);
+}
+
 h1, h2, h3, h4, h5, h6{
     text-align: center;
 }
@@ -40,10 +58,17 @@ dialog {
 dialog > *:not(:last-child){
     margin-bottom: 1rem;
 }
-header > div{
-    margin: 1rem 0;
+.scores{
     display: flex;
+    justify-content: space-around;
     gap: 2rem;
+}
+.gameMode{
+    display: flex;
+    gap: 1rem;
+}
+.gameMode *:not(:last-child){
+    margin-right: 1rem;
 }
 footer{
     display: flex;
